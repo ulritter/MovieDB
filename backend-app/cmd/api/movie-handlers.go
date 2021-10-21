@@ -76,17 +76,14 @@ func (app *application) getAllMoviesByGenre(w http.ResponseWriter, r *http.Reque
 
 func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
-	app.logger.Println("deleteMovie Context ", r.Context())
-	app.logger.Println("deleteMovie Params ", params)
-	app.logger.Println("deleteMovie Atoi: ", params.ByName(":id"))
 
 	id, err := strconv.Atoi(params.ByName("id"))
 	if err != nil {
-		app.errorJSON(w, err)
+		app.errorJSON(w, err, http.StatusBadRequest)
 	}
 	err = app.models.DB.DeleteMovie(id)
 	if err != nil {
-		app.errorJSON(w, err)
+		app.errorJSON(w, err, http.StatusNotFound)
 	}
 
 	ok := jsonResp{
@@ -94,7 +91,7 @@ func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 	}
 	err = app.writeJSON(w, http.StatusOK, ok, "response")
 	if err != nil {
-		app.errorJSON(w, err)
+		app.errorJSON(w, err, http.StatusRequestTimeout)
 		return
 	}
 }
