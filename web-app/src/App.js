@@ -65,7 +65,7 @@ export default class App extends Component {
                   <li className="list-group-item">
                     <Link to="/genres">Genres</Link>
                   </li>
-                  {this.state.jwt !== "" && 
+                  {this.state.jwt !== "" &&
                     <Fragment>
                       <li className="list-group-item">
                         <Link to="/admin/movie/0">Add Movie</Link>
@@ -77,7 +77,7 @@ export default class App extends Component {
                   }
                 </ul>
                 <pre>
-                {JSON.stringify(this.state, null, 3)}
+                  {JSON.stringify(this.state, null, 3)}
                 </pre>
               </nav>
             </div>
@@ -93,18 +93,19 @@ export default class App extends Component {
 
                 <Route path="/genre/:id" component={OneGenre} />
 
-                <Route exact path="/login" component={(props) => <Login {...props} handleJWTChange={this.handleJWTChange}/>}/>
+                <Route exact path="/login" component={(props) => <Login {...props} handleJWTChange={this.handleJWTChange} />} />
 
                 <Route exact path="/genres">
                   <Genres />
                 </Route>
 
-                <Route path="/admin/movie/:id" component={EditMovie} />
+                <Route path="/admin/movie/:id"
+                  component={(props) => (<EditMovie {...props} jwt={this.state.jwt} />)}
+                />
 
-                <Route path="/admin">
-                  <Admin />
-                </Route>
-
+                <Route path="/admin"
+                  component={(props) => (<Admin {...props} jwt={this.state.jwt} />)}
+                />
                 <Route path="/">
                   <Home />
                 </Route>

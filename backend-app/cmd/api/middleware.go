@@ -20,7 +20,7 @@ func (app *application) enableCORS(next http.Handler) http.Handler {
 
 func (app *application) checkToken(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Vary", "Auhthorization")
+		w.Header().Add("Vary", "Authorization")
 
 		authHeader := r.Header.Get("Authorization")
 

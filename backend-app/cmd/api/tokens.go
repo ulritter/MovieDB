@@ -43,7 +43,7 @@ func CreateSecret(secret string, data string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func (app *application) SignIn(w http.ResponseWriter, r *http.Request) {
+func (app *application) Signin(w http.ResponseWriter, r *http.Request) {
 	var creds Credentials
 
 	err := json.NewDecoder(r.Body).Decode(&creds)

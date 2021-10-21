@@ -53,7 +53,7 @@ func (app *application) getAllGenres(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (app *application) getAllMoviesByGenres(w http.ResponseWriter, r *http.Request) {
+func (app *application) getAllMoviesByGenre(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
 
 	genreID, err := strconv.Atoi(params.ByName("genre_id"))
@@ -76,6 +76,10 @@ func (app *application) getAllMoviesByGenres(w http.ResponseWriter, r *http.Requ
 
 func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
+	app.logger.Println("deleteMovie Context ", r.Context())
+	app.logger.Println("deleteMovie Params ", params)
+	app.logger.Println("deleteMovie Atoi: ", params.ByName(":id"))
+
 	id, err := strconv.Atoi(params.ByName("id"))
 	if err != nil {
 		app.errorJSON(w, err)
