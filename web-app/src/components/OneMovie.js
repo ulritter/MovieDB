@@ -52,6 +52,11 @@ export default class OneMovie extends Component {
                     <h2>
                         Movie: {movie.title} ({movie.year})
                     </h2>
+                    {movie.poster !== "" && (
+                        <div>
+                            <img src={`https://image.tmdb.org/t/p/w200${movie.poster}`} alt="poster"/>
+                        </div>
+                    )}
                     <div className="float-start">
                         <small>{movie.mpaa_rating}</small>
                     </div>
