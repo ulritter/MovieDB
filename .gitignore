@@ -1,4 +1,5 @@
 .DS_Store
 Caddyfile
 build.md
+setvars.sh
 

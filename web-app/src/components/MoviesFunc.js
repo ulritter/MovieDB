@@ -1,61 +1,31 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Route, Link } from 'react-router-dom';
+import React, { useState, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
-export default class Movies extends Component {
+function MoviesFunc(props) {
+    const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
 
-    state = {
-        movies: [],
-        isLoaded: false,
-        error: null,
-    };
-
-    componentDidMount() {
+    useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/v1/movies`)
-            // .then ((response) => response.json())
             .then((response) => {
                 console.log("Status code is", response.status)
                 if (response.status !== 200) {
-                    let err = Error;
-                    err.message = "Invalid response code: " + response.status;
-                    this.setState({ error: err });
+                    setError("Invalid response code: ", response.status);
+                } else {
+                    setError(null);
                 }
                 return response.json()
             })
             .then((json) => {
-                this.setState({
-                    movies: json.movies,
-                    isLoaded: true,
-                    error: null,
-                },
-                    (error) => {
-                        this.setState({
-                            isLoaded: true,
-                            error,
-                        })
-                    }
-                );
+                setMovies(json.movies);
             });
-    }
+    }, []); 
 
-    render() {
-        const { movies, isLoaded, error } = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <p>Loading ...</p>;
-        } else {
-            return (
-                // Simple List
-                // <Fragment>
-                //     <h2>Choose a movie</h2>
-                //     <div className="list-group">
-                //         {movies.map( (m) => (
-                //                 <Link key={m.id} to={`/movies/${m.id}`} className="list-group-item list-goup-item-action">{m.title}</Link>
-                //         ))}
-                //     </div>
-                // </Fragment>
+    if (error !== null) {
 
-                // more comprehensive list
+    } else {
+        return (
+            <Fragment>
                 <div className="list-group">
                     <table className="table table-borderless">
                         {movies.map((m) => (
@@ -81,7 +51,9 @@ export default class Movies extends Component {
 
                     </table>
                 </div>
-            );
-        }
+            </Fragment>
+        );
     }
 }
+
+export default MoviesFunc;

@@ -138,7 +138,7 @@ export default class EditMovie extends Component {
         if (id > 0) {
             fetch(`${process.env.REACT_APP_API_URL}/v1/movie/` + id)
                 .then((response) => {
-                    if (response.status !== "200") {
+                    if (response.status !== 200) {
                         let err = Error;
                         err.Message = "Invalid repsonse code: " + response.status;
                         this.setState({ error: err });

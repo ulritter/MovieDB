@@ -12,7 +12,7 @@ export default class OneMovie extends Component {
         fetch(`${process.env.REACT_APP_API_URL}/v1/movie/` + this.props.match.params.id)
             .then((response) => {
                 console.log("Status code is", response.status)
-                if (response.status !== "200") {
+                if (response.status !== 200) {
                     let err = Error;
                     err.message = "Invalid response code: " + response.status;
                     this.setState({ error: err });
