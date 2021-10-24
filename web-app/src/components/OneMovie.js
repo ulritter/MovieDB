@@ -54,7 +54,7 @@ export default class OneMovie extends Component {
                     </h2>
                     {movie.poster !== "" && (
                         <div>
-                            <img src={`https://image.tmdb.org/t/p/w200${movie.poster}`} alt="poster"/>
+                            <img src={`https://image.tmdb.org/t/p/w200/${movie.poster}`} alt="poster"/>
                         </div>
                     )}
                     <div className="float-start">

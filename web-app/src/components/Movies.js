@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Route, Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Movies extends Component {
 
@@ -58,27 +58,30 @@ export default class Movies extends Component {
                 // more comprehensive list
                 <div className="list-group">
                     <table className="table table-borderless">
-                        {movies.map((m) => (
-                            <tr>
-                                <td>
-                                    <Link key={m.id}
-                                        className="list-group-item list-goup-item-action"
-                                        to={`/movies/${m.id}`}>
-                                        <strong> {m.title}</strong><br />
-                                        <small className="text-muted">
-                                            ({m.year}) - {m.runtime} minutes<br />
-                                            {m.description.slice(0, 100)}...
-                                        </small>
-                                    </Link >
-                                </td>
-                                <td>
-                                    <Link className="list-group-item list-goup-item-action" to={`/movies/${m.id}`}>
-                                        <img src={`https://image.tmdb.org/t/p/w200${m.poster}`} height="70px" alt="poster" />
-                                    </Link>
-                                </td>
-                            </tr>
-                        ))}
-
+                        <tbody>
+                            {movies.map((m) => (
+                                <tr>
+                                    <td>
+                                        <Link key={m.id}
+                                            className="list-group-item list-goup-item-action"
+                                            to={`/movies/${m.id}`}>
+                                            <strong> {m.title}</strong><br />
+                                            <small className="text-muted">
+                                                ({m.year}) - {m.runtime} minutes<br />
+                                                {m.description.slice(0, 100)}...
+                                            </small>
+                                        </Link >
+                                    </td>
+                                    <td>
+                                        {m.poster !== "" && (
+                                            <Link key={`p${m.id}`} className="list-group-item " to={`/movies/${m.id}`}>
+                                                <img src={`https://image.tmdb.org/t/p/w200${m.poster}`} height="100px" alt="poster" />
+                                            </Link>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             );

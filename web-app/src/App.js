@@ -11,6 +11,12 @@ import Login from './components/Login';
 import GraphQL from './components/GraphQL';
 import OneMovieGraphQL from './components/OneMovieGraphQL';
 import MoviesFunc from './components/MoviesFunc';
+import GenresFunc from './components/GenresFunc';
+import OneMovieFunc from './components/OneMovieFunc';
+import OneGenreFunc from './components/OneGenreFunc';
+import EditMovieFunc from './components/EditMovieFunc';
+import AdminFunc from './components/AdminFunc';
+import LoginFunc from './components/LoginFunc';
 
 
 export default class App extends Component {
@@ -101,7 +107,7 @@ export default class App extends Component {
             <div className="col-md-10">
               <Switch>
 
-                <Route path="/movies/:id" component={OneMovie} />
+                <Route path="/movies/:id" component={OneMovieFunc} />
 
                 <Route path="/moviesgraphql/:id" component={OneMovieGraphQL} />
 
@@ -109,12 +115,12 @@ export default class App extends Component {
                   <MoviesFunc />
                 </Route>
 
-                <Route path="/genre/:id" component={OneGenre} />
+                <Route path="/genre/:id" component={OneGenreFunc} />
 
-                <Route exact path="/login" component={(props) => <Login {...props} handleJWTChange={this.handleJWTChange} />} />
+                <Route exact path="/login" component={(props) => <LoginFunc {...props} handleJWTChange={this.handleJWTChange} />} />
 
                 <Route exact path="/genres">
-                  <Genres />
+                  <GenresFunc />
                 </Route>
 
                 <Route exact path="/graphql">
@@ -123,11 +129,11 @@ export default class App extends Component {
 
 
                 <Route path="/admin/movie/:id"
-                  component={(props) => (<EditMovie {...props} jwt={this.state.jwt} />)}
+                  component={(props) => (<EditMovieFunc {...props} jwt={this.state.jwt} />)}
                 />
 
                 <Route path="/admin"
-                  component={(props) => (<Admin {...props} jwt={this.state.jwt} />)}
+                  component={(props) => (<AdminFunc {...props} jwt={this.state.jwt} />)}
                 />
                 <Route path="/">
                   <Home />

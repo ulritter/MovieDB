@@ -19,36 +19,39 @@ function MoviesFunc(props) {
             .then((json) => {
                 setMovies(json.movies);
             });
-    }, []); 
+    }, []);
 
     if (error !== null) {
-
+        return <div>Error: {error.message}</div>
     } else {
         return (
             <Fragment>
                 <div className="list-group">
                     <table className="table table-borderless">
-                        {movies.map((m) => (
-                            <tr>
-                                <td>
-                                    <Link key={m.id}
-                                        className="list-group-item list-goup-item-action"
-                                        to={`/movies/${m.id}`}>
-                                        <strong> {m.title}</strong><br />
-                                        <small className="text-muted">
-                                            ({m.year}) - {m.runtime} minutes<br />
-                                            {m.description.slice(0, 100)}...
-                                        </small>
-                                    </Link >
-                                </td>
-                                <td>
-                                    <Link className="list-group-item list-goup-item-action" to={`/movies/${m.id}`}>
-                                        <img src={`https://image.tmdb.org/t/p/w200${m.poster}`} height="70px" alt="poster" />
-                                    </Link>
-                                </td>
-                            </tr>
-                        ))}
-
+                        <tbody>
+                            {movies.map((m) => (
+                                <tr>
+                                    <td>
+                                        <Link key={m.id}
+                                            className="list-group-item list-goup-item-action"
+                                            to={`/movies/${m.id}`}>
+                                            <strong> {m.title}</strong><br />
+                                            <small className="text-muted">
+                                                ({m.year}) - {m.runtime} minutes<br />
+                                                {m.description.slice(0, 100)}...
+                                            </small>
+                                        </Link >
+                                    </td>
+                                    <td>
+                                        {m.poster !== "" && (
+                                            <Link key={`p${m.id}`} className="list-group-item " to={`/movies/${m.id}`}>
+                                                <img src={`https://image.tmdb.org/t/p/w200${m.poster}`} height="73px" alt="poster" />
+                                            </Link>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             </Fragment>

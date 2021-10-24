@@ -61,10 +61,10 @@ export default class OneMovieGraphQL extends Component {
                     <h2>
                         Movie: {movie.title} ({movie.year})
                     </h2>
-
+                    
                     {movie.poster !== "" && (
                         <div>
-                            <img src={`https://image.tmdb.org/t/p/w200${movie.poster}`} alt="poster"/>
+                            <img src={`https://image.tmdb.org/t/p/w200/${movie.poster}`} alt="poster"/>
                         </div>
                     )}
 
