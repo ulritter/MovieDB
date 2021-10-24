@@ -12,7 +12,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:4000/v1/genres")
+        fetch(`${process.env.REACT_APP_API_URL}/v1/genres`)
             .then((response) => {
                 console.log("Status code is", response.status)
                 if (response.status !== "200") {

@@ -42,7 +42,7 @@ type application struct {
 func main() {
 	var cfg config
 
-	cfg.jwt.secret = CreateSecret("mysecret", "data")
+	cfg.jwt.secret = CreateSecret(os.Getenv("GO_MOVIES_JWT1"), os.Getenv("GO_MOVIES_JWT1"))
 	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
 	flag.StringVar(&cfg.env, "env", "development", "Application environment (development|production)")
 	flag.StringVar(&cfg.db.dsn, "dsn", "postgres://uritter@localhost/go_movies?sslmode=disable", "Postgres connection string")

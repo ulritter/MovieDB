@@ -61,7 +61,7 @@ export default class GraphQL extends Component {
         }
 
 
-        fetch('http://localhost:4000/v1/graphql', requestOptions)
+        fetch(`${process.env.REACT_APP_API_URL}/v1/graphql`, requestOptions)
             .then(response => response.json())
             .then((data) => {
                 console.log(data);
@@ -104,7 +104,7 @@ export default class GraphQL extends Component {
         }
 
 
-        fetch('http://localhost:4000/v1/graphql', requestOptions)
+        fetch(`${process.env.REACT_APP_API_URL}/v1/graphql`, requestOptions)
             .then(response => response.json())
             .then((data) => {
                 console.log(data);
